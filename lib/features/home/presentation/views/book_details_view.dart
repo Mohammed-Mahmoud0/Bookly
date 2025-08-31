@@ -6,8 +6,6 @@ class BookDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BookDetailViewBody(),
-    );
+    return Scaffold(body: BookDetailViewBody());
   }
 }
