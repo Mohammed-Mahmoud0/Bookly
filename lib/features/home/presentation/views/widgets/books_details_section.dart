@@ -1,7 +1,7 @@
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly/features/home/presentation/views/widgets/books_action.dart';
-import 'package:bookly/features/home/presentation/views/widgets/custom_list_view_item.dart';
+import 'package:bookly/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsSection extends StatelessWidget {
@@ -14,7 +14,7 @@ class BookDetailsSection extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.2),
-          child: FeaturedListViewItem(imageUrl: 'assets/images/test_image.png'),
+          child: CustomBookImage(imageUrl: 'assets/images/test_image.png'),
         ),
         const SizedBox(height: 43),
         Text('The Jungle Book', style: Styles.textStyle30),
