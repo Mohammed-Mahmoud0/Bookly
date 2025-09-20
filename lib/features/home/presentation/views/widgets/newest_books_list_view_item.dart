@@ -21,7 +21,9 @@ class BookListViewItem extends StatelessWidget {
         height: 125,
         child: Row(
           children: [
-            CustomBookImage(imageUrl: book.volumeInfo!.imageLinks!.thumbnail),
+            CustomBookImage(
+              imageUrl: book.volumeInfo.imageLinks?.thumbnail ?? '',
+            ),
             const SizedBox(width: 30),
             Expanded(
               child: Column(
@@ -30,7 +32,7 @@ class BookListViewItem extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
-                      book.volumeInfo!.title!,
+                      book.volumeInfo.title!,
                       style: Styles.textStyle20.copyWith(
                         fontFamily: kGtSectraFine,
                       ),
@@ -39,7 +41,11 @@ class BookListViewItem extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 3),
-                  Text(book.volumeInfo!.authors![0], style: Styles.textStyle14),
+                  Text(
+                    book.volumeInfo.authors![0],
+                    style: Styles.textStyle14,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 3),
                   Row(
                     children: [
@@ -50,7 +56,10 @@ class BookListViewItem extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      BookRating(),
+                      BookRating(
+                        rating: book.volumeInfo.averageRating?.round() ?? 0,
+                        count: book.volumeInfo.ratingsCount ?? 0,
+                      ),
                     ],
                   ),
                 ],
