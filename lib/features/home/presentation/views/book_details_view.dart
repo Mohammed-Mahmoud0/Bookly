@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookDetailsView extends StatefulWidget {
-  const BookDetailsView({super.key, required this.book});
+  const BookDetailsView({
+    super.key, 
+    required this.book, 
+  });
 
   final BookModel book;
 
@@ -17,10 +20,11 @@ class _BookDetailsViewState extends State<BookDetailsView> {
   @override
   void initState() {
     super.initState();
+    String query = widget.book.volumeInfo.categories?.first ?? 'programming';
     BlocProvider.of<SimilarBooksCubit>(
       context,
       listen: false,
-    ).fetchSimilarBooks(category: widget.book.volumeInfo.categories![0]);
+    ).fetchSimilarBooks(query: query);
   }
 
   @override
