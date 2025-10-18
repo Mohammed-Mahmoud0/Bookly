@@ -1,3 +1,4 @@
+import 'package:bookly/core/utils/page_transitions.dart';
 import 'package:bookly/core/utils/service_locator.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/data/repos/home_repo_implementation.dart';
@@ -13,21 +14,42 @@ abstract class AppRouter {
   static const String kHomeView = '/homeView';
   static const String kBookDetailsView = '/bookDetailsView';
   static const String kSearchView = '/searchView';
+
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SplashView()),
-      GoRoute(path: '/homeView', builder: (context, state) => const HomeView()),
+      GoRoute(
+        path: '/',
+        pageBuilder: (context, state) =>
+            PageTransitions.fadeTransition(context, state, const SplashView()),
+      ),
+
+      GoRoute(
+        path: '/homeView',
+        pageBuilder: (context, state) =>
+            PageTransitions.slideTransition(context, state, const HomeView()),
+      ),
+
       GoRoute(
         path: '/bookDetailsView',
-        builder: (context, state) => BlocProvider(
-          create: (context) =>
-              SimilarBooksCubit(getIt.get<HomeRepoImplementation>()),
-          child: BookDetailsView(book: state.extra as BookModel),
+        pageBuilder: (context, state) => PageTransitions.scaleSlideTransition(
+          context,
+          state,
+          BlocProvider(
+            create: (context) =>
+                SimilarBooksCubit(getIt.get<HomeRepoImplementation>()),
+            child: BookDetailsView(book: state.extra as BookModel),
+          ),
         ),
       ),
+
       GoRoute(
         path: '/searchView',
-        builder: (context, state) => const SearchView(),
+        pageBuilder: (context, state) =>
+            PageTransitions.slideFromBottomTransition(
+              context,
+              state,
+              const SearchView(),
+            ),
       ),
     ],
   );
